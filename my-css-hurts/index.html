@@ -1,0 +1,431 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/0.96/head.min.js"></script>
+    <link rel="stylesheet" href="reveal.js-3.5.0/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js-3.5.0/css/theme/league.css">
+    <link rel="stylesheet" href="reveal.js-3.5.0/lib/css/zenburn.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .reveal a {
+            color: orange;
+        }
+
+        .reveal a:hover {
+            color: darkorange;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .reveal pre code {
+            max-height: 600px;
+        }
+
+        .two_columns {
+            display: flex;
+        }
+        .two_columns > * {
+            margin-left: 10px !important;
+            margin-right: 10px !important;
+        }
+
+        /* RESET STYLES
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+        .chart-skills {
+            margin: 0 auto;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .chart-skills *,
+        .chart-skills::before {
+            box-sizing: border-box;
+        }
+
+        /* CHART-SKILLS STYLES
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+        .chart-skills {
+            position: relative;
+            width: 50vw;
+            height: 25vw;
+            overflow: hidden;
+            list-style-type: none !important;
+        }
+
+        .chart-skills::before,
+        .chart-skills::after {
+            position: absolute;
+        }
+
+        .chart-skills::before {
+            content: '';
+            width: inherit;
+            height: inherit;
+            border-bottom: none;
+            border-top-left-radius: 25vw;
+            border-top-right-radius: 25vw;
+        }
+
+        .chart-skills li {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            border: 20vh solid;
+            border-top: none;
+            border-bottom-left-radius: 25vw;
+            border-bottom-right-radius: 25vw;
+            transform-origin: 50% 0;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            animation-fill-mode: forwards;
+            animation-duration: .4s;
+            animation-timing-function: linear;
+        }
+
+        .chart-skills.visible li:nth-child(1) {
+            z-index: 6;
+            border-color: #3c3f41;
+            animation-name: rotate-one;
+        }
+
+        .chart-skills.visible li:nth-child(2) {
+            z-index: 5;
+            border-color: #c9222b;
+            animation-name: rotate-two;
+            animation-delay: .4s;
+        }
+
+        .chart-skills.visible li:nth-child(3) {
+            z-index: 4;
+            border-color: #f26522;
+            animation-name: rotate-three;
+            animation-delay: .8s;
+        }
+
+        .chart-skills.visible li:nth-child(4) {
+            z-index: 3;
+            border-color: #286c4f;
+            animation-name: rotate-four;
+            animation-delay: 1.2s;
+        }
+
+        .chart-skills.visible li:nth-child(5) {
+            z-index: 2;
+            border-color: #47acb1;
+            animation-name: rotate-five;
+            animation-delay: 1.6s;
+        }
+
+        .chart-skills.visible li:nth-child(6) {
+            z-index: 1;
+            border-color: #96247a;
+            animation-name: rotate-six;
+            animation-delay: 2.0s;
+        }
+
+        .chart-skills.visible span {
+            position: absolute;
+            font-size: .85em;
+            backface-visibility: hidden;
+            animation: fade-in 2s linear forwards;
+        }
+
+        .chart-skills.visible li:nth-child(1) span {
+            top: -10px;
+            left: 10px;
+            transform: rotate(-6deg);
+        }
+
+        .chart-skills.visible li:nth-child(2) span {
+            top: 20px;
+            left: 10px;
+            transform: rotate(-30deg);
+            animation-delay: .4s;
+        }
+
+        .chart-skills.visible li:nth-child(3) span {
+            top: 129px;
+            left: 46px;
+            transform: rotate(-90deg);
+            animation-delay: .8s;
+        }
+
+        .chart-skills.visible li:nth-child(4) span {
+            top: 69px;
+            left: -50px;
+            transform: rotate(-114deg);
+            animation-delay: 1.2s;
+        }
+
+        .chart-skills.visible li:nth-child(5) span {
+            top: 120px;
+            left: 30px;
+            transform: rotate(-174deg);
+            animation-delay: 1.6s;
+        }
+
+        .chart-skills.visible li:nth-child(6) span {
+            top: 0px;
+            left: 10px;
+            transform: rotate(-180deg);
+            animation-delay: 2.0s;
+        }
+
+        /* ANIMATIONS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+        @keyframes rotate-one {
+            100% {
+                transform: rotate(6deg);
+            }
+        }
+
+        @keyframes rotate-two {
+            0% {
+                transform: rotate(6deg);
+            }
+            100% {
+                transform: rotate(30deg);
+            }
+        }
+
+        @keyframes rotate-three {
+            0% {
+                transform: rotate(30deg);
+            }
+            100% {
+                transform: rotate(90deg);
+            }
+        }
+
+        @keyframes rotate-four {
+            0% {
+                transform: rotate(90deg);
+            }
+            100% {
+                transform: rotate(114deg);
+            }
+        }
+
+        @keyframes rotate-five {
+            0% {
+                transform: rotate(114deg);
+            }
+            100% {
+                transform: rotate(174deg);
+            }
+        }
+
+        @keyframes rotate-six {
+            0% {
+                transform: rotate(174deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes fade-in {
+            0%, 90% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>My CSS hurts</h1>
+            <h3>Feedback about setup a CSS methodology</h3>
+        </section>
+
+        <section>
+            <h2>Pierre Allard</h2>
+            <p>
+                <img src="github-256.png">@pierallard
+            </p>
+            <p>
+                <img src="Twitter_logo_blue.png">@pierrallard
+            </p>
+            <p>
+                Full stack developer @ Akeneo
+            </p>
+        </section>
+
+        <section>
+            <h2>Full stack developer ?</h2>
+            <p>
+            <ul class="fragment chart-skills">
+                <li>
+                    <span>Debian</span>
+                </li>
+                <li>
+                    <span>mySQL</span>
+                </li>
+                <li>
+                    <span>PHP</span>
+                </li>
+                <li>
+                    <span>HTML</span>
+                </li>
+                <li>
+                    <span>JS</span>
+                </li>
+                <li>
+                    <span>CSS</span>
+                </li>
+            </ul>
+            </p>
+        </section>
+
+        <section>
+            <h2>Horror gallery</h2>
+            <div class="two_columns">
+            <pre class="fragment"><code class="hljs php" data-trim>
+function(p, c0) {
+    console.log('Hello'  +p)
+};
+            </code></pre>
+
+                <pre class="fragment"><code class="hljs js" data-trim>
+f = function(p, c0) {
+    console.log('Hello'  +p)
+};
+            </code></pre>
+
+            </div>
+
+            <pre class="fragment"><code class="hljs css" data-trim>
+#main > div.c + span:not(.inline) a {
+    width: 50px !important;
+}
+            </code></pre>
+
+        </section>
+
+        <section>
+            <h2>CSS, a programming language?</h2>
+            <p>
+            <ul class="fragment">
+                <li>Vocabulary, semantic</li>
+                <li>Best practices, methodologies</li>
+                <li>Frameworks</li>
+                <li>Checkstyle</li>
+                <li>Specifications</li>
+            </ul>
+            </p>
+
+            <div class="two_columns">
+                <div class="fragment">
+                    Java, C, PHP, Ruby, Python, JS
+                </div>
+                <div class="fragment">
+                    XML, YAML, JSON, UML, CSS
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Broken windows theory</h2>
+            <p>
+                Vicious circle of code quality decline
+            </p>
+            <p>
+                <h3>State of the art 1.5</h3>
+                <ul>
+                    <li>Huge mess</li>
+                    <li>3500 definitions</li>
+                    <li>17k CSS lines (PHP: 65k)</li>
+                    <li>175 updates for 1 color</li>
+                    <li>200 colors, 28 font sizes</li>
+                    <li>Redundancy</li>
+                </ul>
+            </p>
+        </section>
+
+
+
+        <section>
+            <h2>Pretty Code</h2>
+            <pre><code class="hljs html" data-trim>
+<div class="Button">
+    <span class="Button-icon">
+        <i class="fa fa-cloud"></i>
+    </span>
+    <span class="Button-label">Publish</span>
+</div>
+            </code></pre>
+        </section>
+
+        <section>
+            <pre><code class="hljs less" data-trim>
+.Button {
+  @ButtonSize: 30px;
+  @ButtonDefaultColor: DeepSkyBlue;
+  @ButtonErrorColor: Crimson;
+
+  height: @ButtonSize;
+  line-height: @ButtonSize;
+  background-color: @ButtonDefaultColor;
+  color: white;
+
+  &-icon {
+    width: @ButtonSize;
+    background-color: darken(@ButtonDefaultColor, 10%);
+
+    &--important {
+      text-transform: uppercase;
+    }
+  }
+
+  &-label {
+    padding: 0 10px;
+  }
+
+  &--error {
+    background-color: @ButtonErrorColor;
+  }
+
+  &--error &-icon {
+    background-color: darken(ButtonErrorColor, 10%);
+  }
+}
+            </code></pre>
+        </section>
+
+
+    </div>
+</div>
+<script src="reveal.js-3.5.0/js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        slideNumber: true,
+        history: true,
+        parallaxBackgroundImage: 'flat-design-wallpapers-HD-02.jpg', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+        dependencies: [
+            {
+                src: 'reveal.js-3.5.0/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js-3.5.0/plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+
+    });
+</script>
+</body>
+</html>
